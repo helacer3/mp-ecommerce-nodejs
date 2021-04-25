@@ -2,6 +2,7 @@ const express     = require("express");
 const mercadopago = require("mercadopago");
 const config      = require("./config.js");
 const app         = express();
+var appPort       = process.env.PORT || 3000;
 
 /**
 * configure
@@ -133,6 +134,6 @@ app.get('/success', function(request, response) {
 	})
 });
 
-app.listen(3000, () => {
-  console.log("The server is now running on Port 3000");
+app.listen(appPort, () => {
+  console.log("The server is now running on Port: "+appPort);
 });
