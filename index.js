@@ -38,7 +38,7 @@ app.get("/pending", function (req, res) {
 
 app.post("/notification", function (req, res) {
   // res.status(200).sendFile("front/responses.html", { root: __dirname });
-  console.log("Respuesta Notificación: ", res);
+  console.log("Respuesta Notificacin: ", res);
 }); 
 
 
@@ -133,6 +133,6 @@ app.get('/success', function(request, response) {
 	})
 });
 
-app.listen(8080, () => {
-  console.log("The server is now running on Port 8080");
+app.listen(3000, () => {
+  console.log("The server is now running on Port 3000");
 });
