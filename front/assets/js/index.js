@@ -12,16 +12,13 @@ $(function() {
 		  };
 	    // call Proccess Payment
 		await proccessPaymetPreference(reqObject)
-			.then(function(response) {
-				return response.json();
-			})
 			.then(function(jsonResponse) {
-				console.log("jsonResponse: ", jsonResponse);
-				document.cookie = "datId="+jsonResponse.body.response.id+";datInit="+jsonResponse.body.response.init_point;
-				window.location.href + "/resume.html";
+				document.cookie = "datId="+jsonResponse.response.id;
+				document.cookie = "datInit="+jsonResponse.response.init_point; // sandbox_init_point
+				window.location.replace("/resume");
 			})
-			.catch(function() {
-				console.error("Unexpected error");
+			.catch(function(error) {
+				console.error("Unexpected error", error);
 			});
 	});
 
@@ -40,7 +37,7 @@ $(function() {
 				body: JSON.stringify(reqObject),
 			})
 			.then(function(response) {
-				return response.json();
+				defResponse =  response.json();
 			})
 			.catch(function() {
 				console.error("Unexpected error");

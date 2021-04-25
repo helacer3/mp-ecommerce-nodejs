@@ -20,6 +20,28 @@ app.get("/", function (req, res) {
   res.status(200).sendFile("front/index.html", { root: __dirname });
 }); 
 
+app.get("/resume", function (req, res) {
+  res.status(200).sendFile("front/resume.html", { root: __dirname });
+}); 
+
+app.get("/success", function (req, res) {
+  res.status(200).sendFile("front/responses.html", { root: __dirname });
+}); 
+
+app.get("/failure", function (req, res) {
+  res.status(200).sendFile("front/responses.html", { root: __dirname });
+}); 
+
+app.get("/pending", function (req, res) {
+  res.status(200).sendFile("front/responses.html", { root: __dirname });
+});
+
+app.post("/notification", function (req, res) {
+  // res.status(200).sendFile("front/responses.html", { root: __dirname });
+  console.log("Respuesta Notificación: ", res);
+}); 
+
+
 app.get("/imageProduct", function (req, res) {
   return res.status(200).sendFile("front/assets/images/mrcLibre.JPG", { root: __dirname });
 }); 
@@ -30,6 +52,10 @@ app.get("/jsBase", function (req, res) {
 
 app.get("/jsResume", function (req, res) {
   return res.status(200).sendFile("front/assets/js/resume.js", { root: __dirname });
+});
+
+app.get("/jsResponse", function (req, res) {
+  return res.status(200).sendFile("front/assets/js/responses.js", { root: __dirname });
 });
 
 app.post("/create_preference", (req, res) => {

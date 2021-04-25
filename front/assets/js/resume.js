@@ -3,26 +3,26 @@ $(function() {
 	let datInitCookie = readCookie("datInit");
 	let datIdCookie   = readCookie("datId");
 
-	console.log("datInitCookie: ", datInitCookie):
-	console.log("datId: ", datId):
+	console.log("datInitCookie: ", datInitCookie);
+	console.log("datId: ", datIdCookie);
 
-	$('#lnkPagar').attr("href", datInitCookie);
+	// $('#lnkPagar').attr("href", datInitCookie);
 
 	const mp = new MercadoPago('APP_USR-a98b17ae-47a6-4a35-b92d-01919002b97e', {
 		locale: 'es-CO'
 	});
 
-	/*mp.checkout({
+	mp.checkout({
 		preference: {
-			id: "lnkPagar",
+			id: datIdCookie,
 		},
 		render: {
-	    	container: '',
+	    	container: '#lnkPagar',
 	    	label: 'PAGAR LA COMPRA',
 	    	type: 'wallet',
 	    },
 	    rediretc: 'modal'
-	});*/
+	});
 
 	/**
 	* read Cookie
