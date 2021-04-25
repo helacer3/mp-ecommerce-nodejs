@@ -60,14 +60,14 @@ app.get("/jsResponse", function (req, res) {
 });
 
 app.post("/create_preference", (req, res) => {
-
-	let preference = {
+	let defResponse = {};
+	let preference  = {
 		payer: {
 			name: "Lalo",
 			surname: "Landa",
 			email: "test_user_83958037@testuser.com",
 			phone: {
-				area_code: "",
+				area_code: "52",
 				number: 5549737300
 			},
 			address: {
@@ -78,16 +78,16 @@ app.post("/create_preference", (req, res) => {
 		},
 		items: [{
 			id: "1234",
-			title: req.body.description,
-			description: "",
-			picture_url: "",			
+			title: req.body.title,
+			description: "Dispositivo móvil de Tienda e-commerce",
+			picture_url: req.body.baseUrl+req.body.image,			
 			unit_price: Number(req.body.price),
 			quantity: Number(req.body.quantity),
 		}],
 		back_urls: {
-			"success": "/success",
-			"failure": "/failure",
-			"pending": "/pending"
+			"success": req.body.baseUrl+"success",
+			"failure": req.body.baseUrl+"failure",
+			"pending": req.body.baseUrl+"pending"
 		},
 		payment_methods: {
 			"excluded_payment_methods": [
@@ -102,29 +102,26 @@ app.post("/create_preference", (req, res) => {
 		    ],
 			installments: 6
 		},
-		notification_url: "/notification",
+		notification_url: req.body.baseUrl+"notification",
 		external_reference: "helacer3@yahoo.es",
 		auto_return: 'approved',
 	};
 
+	// console.log(preference);
+
 	mercadopago.preferences.create(preference)
 		.then(function (response) {
-			res.json(response)
+			defResponse = res.json(response)
 		}).catch(function (error) {
 			console.log(error);
 		});
+
+	// default Return
+	return defResponse;
 });
 
 
-/*
-Estos son los parámetros que enviamos en la QueryString cuando redirigimos a las back_url establecidas:
-https://www.tusitio.com/success.php?collection_id=[PAYMENT_ID]&collection_status=approved&external_refe
-rence=[EXTERNAL_REFERENCE]&payment_type=credit_card&preference_id=[PREFERENCE_ID]&site_id=[
-SITE_ID]&processing_mode=aggregator&merchant_account_id=null
-*/
-
-
-app.get('/success', function(request, response) {
+/*app.get('/success', function(request, response) {
 	response.json({
 		Payment: request.query.collection_id,
 		Status: request.query.collection_status,
@@ -132,7 +129,7 @@ app.get('/success', function(request, response) {
 		PaymentType: request.query.payment_type,
 		MerchantOrder: request.query.merchant_order_id
 	})
-});
+});*/
 
 app.listen(appPort, () => {
   console.log("The server is now running on Port: "+appPort);

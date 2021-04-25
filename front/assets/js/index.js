@@ -7,12 +7,15 @@ $(function() {
 		// set Request Object
 		var reqObject = {
 		    quantity: 1,
-		    description: "Certificacion MercadoPago",
+		    baseUrl: window.location.href, 
+		    title: "Certificacion MercadoPago",
+		    image: "imageProduct",
 		    price: 100000
 		  };
 	    // call Proccess Payment
 		await proccessPaymetPreference(reqObject)
 			.then(function(jsonResponse) {
+				console.log("jsonResponse: ", jsonResponse);
 				document.cookie = "datId="+jsonResponse.response.id;
 				document.cookie = "datInit="+jsonResponse.response.init_point; // sandbox_init_point
 				window.location.replace("/resume");
@@ -37,10 +40,10 @@ $(function() {
 				body: JSON.stringify(reqObject),
 			})
 			.then(function(response) {
-				defResponse =  response.json();
+				defResponse = response.json();
 			})
-			.catch(function() {
-				console.error("Unexpected error");
+			.catch(function(error) {
+				console.error("Unexpected error: ", error);
 			});
 		// default Return
 		return defResponse;
