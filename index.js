@@ -1,5 +1,6 @@
 const express     = require("express");
 const mercadopago = require("mercadopago");
+const fs          = require('fs');
 const config      = require("./config.js");
 const app         = express();
 var appPort       = process.env.PORT || 3000;
@@ -38,10 +39,14 @@ app.get("/pending", function (req, res) {
 });
 
 app.post("/notification", function (req, res) {
-  // res.status(200).sendFile("front/responses.html", { root: __dirname });
-  console.log("Respuesta Notificacin: ", res);
+  console.log("Respuesta Notificacion: ", res);
+  console.log("ruta notificacion: ", __dirname + "/notification.txt");
+  fs.writeFile( __dirname + "/notification.txt", data);
 }); 
 
+app.get("/notification", function (req, res) {
+  return res.status(200).sendFile("notification.txt", { root: __dirname });
+});
 
 app.get("/imageProduct", function (req, res) {
   return res.status(200).sendFile("front/assets/images/mrcLibre.JPG", { root: __dirname });
