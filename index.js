@@ -99,11 +99,11 @@ app.post("/create_preference", (req, res) => {
 		    	{
 		    		"id": "atm"
 		    	}
-		    ]
+		    ],
+			installments: 6
 		},
 		notification_url: "/notification",
 		external_reference: "helacer3@yahoo.es",
-		installments: 6,
 		auto_return: 'approved',
 	};
 
