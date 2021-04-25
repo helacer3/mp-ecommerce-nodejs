@@ -40,8 +40,7 @@ app.get("/pending", function (req, res) {
 
 app.post("/notification", function (req, res, body) {
   console.log("Respuesta Notificacion: ");
-  console.log(body);
-  console.log(res.body);
+  console.log(req.body);
   res.send('POST request to the homepage');
   //console.log("ruta notificacion: ", __dirname + "/notification.txt");
   //fs.writeFile( __dirname + "/notification.txt", data);
